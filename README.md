@@ -30,7 +30,7 @@ Per desactivar l'entorn:
 
 La base de dades SQLite s'ha de dir `database.db`. S'ha creat amb l'script [database.sql](./database.sql).
 
-## Inicia l'aplicació
+## Run
 
 Executa:
 
@@ -69,4 +69,4 @@ Des de l'opció de `Run and Debug`, crea un fitxer animenat `launch.json` amb el
 
 ## Enllaços de referència:
 
-* Codi adaptat a partir d'aquest exemple: https://pythonbasics.org/flask-sqlite/
+* SQLAlchemy: https://www.digitalocean.com/community/tutorials/how-to-use-flask-sqlalchemy-to-interact-with-databases-in-a-flask-application
