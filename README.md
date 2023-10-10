@@ -26,7 +26,7 @@ Per desactivar l'entorn:
 
     deactivate
 
-## Inicia l'aplicació
+## Run
 
 Executa:
 
@@ -66,4 +66,3 @@ Des de l'opció de `Run and Debug`, crea un fitxer animenat `launch.json` amb el
 ## Enllaços de referència:
 
 * Tutorial de Flask amb Visual Code: https://code.visualstudio.com/docs/python/tutorial-flask
-
