@@ -1,6 +1,6 @@
-# 2daw-m12-projecte1
+# 2daw-m12-p1-s0-examples
 
-Codi d'exemple que serveix de suport per la part backend pel projecte 1 del M12 de 2n de DAW.
+Exemples de suport per l'sprint 0 del projecte 1 dins del mòdul de projecte (M12) de 2n de DAW.
 
 ## Setup
 
