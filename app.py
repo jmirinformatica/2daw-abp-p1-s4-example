@@ -5,7 +5,6 @@ import os
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "Valor aleatori molt llarg i super secret"
 
-
 # ruta absoluta d'aquesta carpeta
 basedir = os.path.abspath(os.path.dirname(__file__)) 
 
@@ -18,13 +17,12 @@ def get_db_connection():
 
 @app.route('/')
 def init():
-    return redirect(url_for('item_list'))
+    return redirect(url_for('items_list'))
 
-@app.route('/item')
-def item_list():
+@app.route('/items/list')
+def items_list():
     with get_db_connection() as con:
         res = con.execute("SELECT id, nom, unitats FROM items ORDER BY id ASC")
         items = res.fetchall()
 
     return render_template('item_list.html', items = items)
-
