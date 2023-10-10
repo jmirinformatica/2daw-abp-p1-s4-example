@@ -69,4 +69,5 @@ Des de l'opció de `Run and Debug`, crea un fitxer animenat `launch.json` amb el
 
 ## Enllaços de referència:
 
-* Codi adaptat a partir d'aquest exemple: https://pythonbasics.org/flask-sqlite/
+* Flask login: https://j2logo.com/tutorial-flask-leccion-4-login/
+* Per visualitzar les cookies he fet servir [Check my cookies](https://chrome.google.com/webstore/detail/check-my-cookies/idmefaajmbkeajdiafefcleiaihkahnm)
