@@ -17,16 +17,13 @@
 			<th>NOM</th>
 			<th>UNITATS</th>
 		</tr>
-		<tr>
-			<td>1</td>
-			<td>Dummy</td>
-			<td>10</td>
-		</tr>
-		<tr>
-			<td>2</td>
-			<td>Dummy</td>
-			<td>14</td>
-		</tr>
+		{% for item in items %}
+			<tr>
+				<td>{{ item['id'] }}</a></td>
+				<td>{{ item['nom'] }}</a></td>
+				<td>{{ item['unitats'] }}</a></td>
+			</tr>
+		{% endfor %}
 	</table>
 </body>
 
