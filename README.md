@@ -30,7 +30,7 @@ Per desactivar l'entorn:
 
 La base de dades SQLite s'ha de dir `database.db`. S'ha creat amb l'script [database.sql](./database.sql).
 
-## Inicia l'aplicació
+## Run
 
 Executa:
 
