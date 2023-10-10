@@ -30,7 +30,7 @@ Per desactivar l'entorn:
 
 La base de dades SQLite s'ha de dir `database.db`. S'ha creat amb l'script [database.sql](./database.sql).
 
-### Inicia l'aplicació
+## Inicia l'aplicació
 
 Executa:
 
@@ -38,7 +38,7 @@ Executa:
 
 I obre un navegador a l'adreça: [http://127.0.0.1:5000](http://127.0.0.1:5000)
 
-### DEBUG
+## Debug amb Visual Code
 
 Des de l'opció de `Run and Debug`, crea un fitxer animenat `launch.json` amb el contingut següent:
 

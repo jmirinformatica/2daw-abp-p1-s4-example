@@ -12,12 +12,12 @@
 <body>
    <h3>Item {{ item['id'] }}</h3>
 
-   <form action="/item/{{ item['id'] }}" method = "POST">
+   <form action="/items/update/{{ item['id'] }}" method = "POST">
       <p><label>Nom: <input type = "text" name = "nom" value = "{{ item['nom'] }}"/></label></p>
       <p><label>Unitats: <input type = "number" name = "unitats" value = "{{ item['unitats'] }}"/></label></p>
       <p><input type = "submit" value = "MODIFICAR" /></p>
    </form>
-   <a href="/item">&#x3c;&#x3c; Tornar al llistat d'items</a>
+   <a href="/items/list">&#x3c;&#x3c; Tornar al llistat d'items</a>
 </body>
 
 </html>
