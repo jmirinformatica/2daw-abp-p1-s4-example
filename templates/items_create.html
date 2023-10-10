@@ -10,17 +10,17 @@
 </head>
 
 <body>
-   <h3>Item {{ item.id }}</h3>
+   <h3>Nou item</h3>
 
-   <form action="/items/update/{{ item.id }}" method="POST">
-      <p><label>Nom: <input type="text" name="nom" value="{{ item.nom }}" /></label></p>
-      <p><label>Unitats: <input type="number" name="unitats" value="{{ item.unitats }}" /></label></p>
+   <form action="/items/create" method="POST">
+      <p><label>Nom: <input type="text" name="nom" value="" /></label></p>
+      <p><label>Unitats: <input type="number" name="unitats" value="" /></label></p>
       <p><label>Supermercat: <select name="store_id">
          {% for store in stores %}
-            <option value="{{ store.id }}" {{ "selected" if  store.id == item.store_id }}>{{store.nom}}</option>
+            <option value="{{ store.id }}">{{store.nom}}</option>
          {% endfor %}
       </select></label></p>
-      <p><input type="submit" value="MODIFICAR" /></p>
+      <p><input type="submit" value="CREAR" /></p>
    </form>
    <a href="/items/list">&#x3c;&#x3c; Tornar al llistat d'items</a>
 </body>
