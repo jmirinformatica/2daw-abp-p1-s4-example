@@ -1,4 +1,4 @@
-from flask import Flask, redirect, url_for, render_template
+from flask import Flask, redirect, url_for, render_template, request
 import sqlite3
 import os
 
@@ -28,3 +28,24 @@ def item_list():
 
     return render_template('item_list.html', items = items)
 
+@app.route('/item/<int:item_id>',methods = ['POST', 'GET'])
+def item(item_id):
+    if request.method == 'GET':
+        with get_db_connection() as con:
+            res = con.execute("SELECT id, nom, unitats FROM items WHERE id = ?", (item_id, ))
+            item = res.fetchone()
+
+        return render_template('item_update.html', item = item)
+
+    else: # POST
+        nom = request.form['nom']
+        unitats = int(request.form['unitats']) # es text, el passo a enter
+
+        with get_db_connection() as con:
+            con.execute(
+                "UPDATE items SET nom = ?, unitats = ? WHERE id = ?", 
+                (nom, unitats, item_id)
+            )
+
+        # https://en.wikipedia.org/wiki/Post/Redirect/Get
+        return redirect(url_for('item', item_id = item_id))

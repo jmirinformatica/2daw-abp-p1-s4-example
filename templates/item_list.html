@@ -18,11 +18,11 @@
 			<th>UNITATS</th>
 		</tr>
 		{% for item in items %}
-			<tr>
-				<td>{{ item['id'] }}</a></td>
-				<td>{{ item['nom'] }}</a></td>
-				<td>{{ item['unitats'] }}</a></td>
-			</tr>
+		<tr>
+			<td><a href="/item/{{ item['id'] }}">{{ item['id'] }}</a></td>
+			<td><a href="/item/{{ item['id'] }}">{{ item['nom'] }}</a></td>
+			<td><a href="/item/{{ item['id'] }}">{{ item['unitats'] }}</a></td>
+		</tr>
 		{% endfor %}
 	</table>
 </body>
