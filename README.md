@@ -52,7 +52,7 @@ Des de l'opció de `Run and Debug`, crea un fitxer animenat `launch.json` amb el
             "request": "launch",
             "module": "flask",
             "env": {
-                "FLASK_APP": "app.py",
+                "FLASK_APP": "wsgi.py",
                 "FLASK_DEBUG": "1"
             },
             "args": [
