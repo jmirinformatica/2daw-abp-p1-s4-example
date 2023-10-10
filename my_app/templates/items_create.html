@@ -13,14 +13,11 @@
    <h3>Nou item</h3>
 
    <form action="/items/create" method="POST">
-      <p><label>Nom: <input type="text" name="nom" value="" /></label></p>
-      <p><label>Unitats: <input type="number" name="unitats" value="" /></label></p>
-      <p><label>Supermercat: <select name="store_id">
-         {% for store in stores %}
-            <option value="{{ store.id }}">{{store.nom}}</option>
-         {% endfor %}
-      </select></label></p>
-      <p><input type="submit" value="CREAR" /></p>
+      {{ form.csrf_token }}
+      <p>{{ form.nom.label }}: {{ form.nom() }}</p>
+      <p>{{ form.unitats.label }}: {{ form.unitats() }}</p>
+      <p>{{ form.store_id.label }}: {{ form.store_id() }}</p>
+      <p>{{ form.submit(value="CREAR") }}</p>
    </form>
    <a href="/items/list">&#x3c;&#x3c; Tornar al llistat d'items</a>
 </body>
