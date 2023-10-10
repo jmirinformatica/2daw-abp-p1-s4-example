@@ -25,4 +25,4 @@ def items_list():
         res = con.execute("SELECT id, nom, unitats FROM items ORDER BY id ASC")
         items = res.fetchall()
 
-    return render_template('item_list.html', items = items)
+    return render_template('items_list.html', items = items)
