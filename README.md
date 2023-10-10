@@ -69,4 +69,5 @@ Des de l'opció de `Run and Debug`, crea un fitxer animenat `launch.json` amb el
 
 ## Enllaços de referència:
 
-* SQLAlchemy: https://www.digitalocean.com/community/tutorials/how-to-use-flask-sqlalchemy-to-interact-with-databases-in-a-flask-application
+* WTForms: https://www.digitalocean.com/community/tutorials/how-to-use-and-validate-web-forms-with-flask-wtf
+* Macros amb WTForms: https://flask.palletsprojects.com/es/latest/patterns/wtforms/
