@@ -40,7 +40,7 @@ I obre un navegador a l'adreça: [http://127.0.0.1:5000](http://127.0.0.1:5000)
 
 ## Debug amb Visual Code
 
-Des de l'opció de `Run and Debug`, crea un fitxer animenat `launch.json` amb el contingut següent:
+Des de l'opció de `Run and Debug`, crea un fitxer anomenat `launch.json` amb el contingut següent:
 
 ```json
 {
