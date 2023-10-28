@@ -1,4 +1,4 @@
-from flask import Blueprint, redirect, url_for, render_template, request
+from flask import Blueprint, redirect, url_for, render_template
 from .models import Item, Store
 from .forms import ItemForm, DeleteForm
 from . import db_manager as db
