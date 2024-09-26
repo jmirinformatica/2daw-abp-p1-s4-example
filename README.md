@@ -1,10 +1,12 @@
-# 2daw-m12-p1-s0-examples
+# 2daw-abp-p1-s1-example
 
-Exemples de suport per l'sprint 0 del projecte 1 dins del mòdul de projecte (M12) de 2n de DAW.
+Exemple de suport per l'sprint 1 del projecte 1 de 2n de DAW.
 
 ## Setup
 
 ### Python Virtual Environment
+
+#### Linux
 
 Crea l'entorn:
 
@@ -26,9 +28,31 @@ Per desactivar l'entorn:
 
     deactivate
 
+#### Windows
+
+Crea l'entorn:
+
+    python -m venv .venv
+
+L'activa:
+
+    .venv\Scripts\activate
+
+Instal·la el requisits:
+
+    pip install -r requirements.txt
+
+Per a generar el fitxer de requiriments:
+
+    pip freeze > requirements.txt
+
+Per desactivar l'entorn:
+
+    deactivate
+
 ### Base de dades
 
-La base de dades SQLite s'ha de dir `database.db`. S'ha creat amb l'script [database.sql](./database.sql).
+La base de dades SQLite és dins de la carpeta [sqlite](./sqlite) s'ha de dir `database.db`. S'ha creat amb l'script [database.sql](./sqlite/database.sql).
 
 ## Run
 
@@ -52,7 +76,7 @@ Des de l'opció de `Run and Debug`, crea un fitxer anomenat `launch.json` amb el
             "request": "launch",
             "module": "flask",
             "env": {
-                "FLASK_APP": "wsgi.py",
+                "FLASK_APP": "app.py",
                 "FLASK_DEBUG": "1"
             },
             "args": [

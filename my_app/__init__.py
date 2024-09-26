@@ -13,7 +13,7 @@ def create_app():
     basedir = os.path.abspath(os.path.dirname(__file__)) 
 
     # paràmetre que farà servir SQLAlchemy per a connectar-se
-    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + basedir + "/../database.db"
+    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + basedir + "/../sqlite/database.db"
     # mostre als logs les ordres SQL que s'executen
     app.config["SQLALCHEMY_ECHO"] = True
 

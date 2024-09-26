@@ -14,7 +14,7 @@ def init():
 
 @main_bp.route('/items/list')
 def items_list():
-    # select amb join que retorna una llista dwe resultats
+    # select amb join que retorna una llista de resultats
     items_with_stores = db.session.query(Item, Store).join(Store).order_by(Item.id.asc()).all()
     return render_template('items_list.html', items_with_stores = items_with_stores)
 
