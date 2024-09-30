@@ -50,6 +50,10 @@ Per desactivar l'entorn:
 
     deactivate
 
+### Base de dades
+
+La base de dades SQLite és dins de la carpeta [sqlite](./sqlite) s'ha de dir `database.db`, tot i que es pot configurar un nom diferent al fitxer de configuració. S'ha creat amb l'script [database.sql](./sqlite/database.sql).
+
 ### Fitxer de configuració
 
 Crea un fitxer `.env` amb els paràmetres de configuració. Pots fer servir com a base el fitxer [.env.exemple](./.env.exemple).

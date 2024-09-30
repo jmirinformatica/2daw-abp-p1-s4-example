@@ -16,18 +16,19 @@
 			<th>ID</th>
 			<th>NOM</th>
 			<th>UNITATS</th>
+			<th>SUPERMERCAT</th>
 		</tr>
+
+		{% for (item, store) in items_with_stores %}
 		<tr>
-			<td>1</td>
-			<td>Dummy</td>
-			<td>10</td>
+			<td><a href="/items/read/{{ item.id }}">{{ item.id }}</a></td>
+			<td><a href="/items/read/{{ item.id }}">{{ item.nom }}</a></td>
+			<td><a href="/items/read/{{ item.id }}">{{ item.unitats }}</a></td>
+			<td><a href="/items/read/{{ item.id }}">{{ store.nom }}</a></td>
 		</tr>
-		<tr>
-			<td>2</td>
-			<td>Dummy</td>
-			<td>14</td>
-		</tr>
+		{% endfor %}
 	</table>
+	<a href="/items/create">Crear un nou item</a>
 </body>
 
 </html>
