@@ -3,9 +3,11 @@ from flask_sqlalchemy import SQLAlchemy
 import os
 import logging
 from flask_login import LoginManager
+from flask_principal import Principal
 
 db_manager = SQLAlchemy()
 login_manager = LoginManager()
+principal_manager =  Principal()
 
 def configure_logging(app):
     log_level = app.config["LOGGING_LEVEL"]
@@ -32,6 +34,9 @@ def configure_db(app):
     
     # Inicialitza el login manager
     login_manager.init_app(app)
+
+    # Initialitza flask_principal per a gestionar els rols
+    principal_manager.init_app(app)
 
     app.logger.info("Configuració de la base de dades aplicada")
 
