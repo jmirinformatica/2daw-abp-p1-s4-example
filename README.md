@@ -1,10 +1,12 @@
-# 2daw-m12-projecte1
+# 2daw-abp-p1-s1-example
 
-Codi d'exemple que serveix de suport per la part backend pel projecte 1 del M12 de 2n de DAW.
+Exemple de suport per l'sprint 1 del projecte 1 de 2n de DAW.
 
 ## Setup
 
 ### Python Virtual Environment
+
+#### Linux
 
 Crea l'entorn:
 
@@ -13,6 +15,28 @@ Crea l'entorn:
 L'activa:
 
     source .venv/bin/activate
+
+Instal·la el requisits:
+
+    pip install -r requirements.txt
+
+Per a generar el fitxer de requiriments:
+
+    pip freeze > requirements.txt
+
+Per desactivar l'entorn:
+
+    deactivate
+
+#### Windows
+
+Crea l'entorn:
+
+    python -m venv .venv
+
+L'activa:
+
+    .venv\Scripts\activate
 
 Instal·la el requisits:
 
@@ -36,7 +60,7 @@ I obre un navegador a l'adreça: [http://127.0.0.1:5000](http://127.0.0.1:5000)
 
 ## Debug amb Visual Code
 
-Des de l'opció de `Run and Debug`, crea un fitxer animenat `launch.json` amb el contingut següent:
+Des de l'opció de `Run and Debug`, crea un fitxer anomenat `launch.json` amb el contingut següent:
 
 ```json
 {
@@ -62,7 +86,3 @@ Des de l'opció de `Run and Debug`, crea un fitxer animenat `launch.json` amb el
     ]
 }
 ```
-
-## Enllaços de referència:
-
-* Tutorial de Flask amb Visual Code: https://code.visualstudio.com/docs/python/tutorial-flask
