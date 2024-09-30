@@ -5,7 +5,7 @@ app.config["SECRET_KEY"] = "Valor aleatori molt llarg i super secret"
 
 @app.route('/')
 def init():
-    return redirect(url_for('item_list'))
+    return redirect(url_for('items_list'))
 
 @app.route('/items/list')
 def items_list():
