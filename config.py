@@ -1,16 +1,13 @@
-from os import environ, path
-from dotenv import load_dotenv
-
-basedir = path.abspath(path.dirname(__file__))
-load_dotenv(path.join(basedir, '.env'), override=True)
-
 class Config:
-    SECRET_KEY = environ.get('SECRET_KEY')
 
-    SQLITE_FILE_RELATIVE_PATH = environ.get('SQLITE_FILE_RELATIVE_PATH')
-
-    SQLALCHEMY_ECHO = environ.get('SQLALCHEMY_ECHO')
-
-    LOGGING_LEVEL = environ.get('LOGGING_LEVEL')
-    LOGGING_FORMAT = environ.get('LOGGING_FORMAT')
-    LOGGING_FILE = environ.get('LOGGING_FILE', '') # si no hi ha cap valor, retorna un string buit
+    # clau secreta per a les sessions guardades a les cookies
+    SECRET_KEY="Valor aleatori molt llarg i super secret"
+    
+    # ruta relativa de la base de dades
+    SQLITE_FILE_RELATIVE_PATH="sqlite/database.db"
+    
+    # mostra les sentències SQL generades pel log
+    SQLALCHEMY_ECHO="True" 
+    
+    # nivell de log (DEBUG, INFO, WARNING, ERROR, CRITICAL)
+    LOGGING_LEVEL="WARNING"
