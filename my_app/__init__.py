@@ -7,10 +7,12 @@ db_manager = SQLAlchemy()
 
 def configure_logging(app):
     log_level = app.config["LOGGING_LEVEL"]
-    # https://stackoverflow.com/a/55490202
+    
+    # Possem el log_level a tots els loggers: https://stackoverflow.com/a/55490202
     loggers = [logging.getLogger(name) for name in logging.root.manager.loggerDict]
     for logger in loggers:
         logger.setLevel(log_level)
+
     app.logger.info("Configuració de logging aplicada")
 
 def configure_db(app):
