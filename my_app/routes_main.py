@@ -1,8 +1,8 @@
 from flask import Blueprint, redirect, url_for, render_template, current_app
+from flask_login import current_user, login_required
 from .models import Item, Store
 from .forms import ItemForm, DeleteForm
 from . import db_manager as db
-from flask import current_app
 
 # per comoditat
 logger = current_app.logger
@@ -14,9 +14,13 @@ main_bp = Blueprint(
 
 @main_bp.route('/')
 def init():
-    return redirect(url_for('main_bp.items_list'))
+    if current_user.is_authenticated:
+        return redirect(url_for('main_bp.items_list'))
+    else:
+        return redirect(url_for("auth_bp.login"))
 
 @main_bp.route('/items/list')
+@login_required
 def items_list():
     logger.debug("Exemple de missatge de debug")
     logger.info("Exemple de missatge de nivell info")
@@ -29,6 +33,7 @@ def items_list():
     return render_template('items_list.html', items_with_stores = items_with_stores)
 
 @main_bp.route('/items/update/<int:item_id>',methods = ['POST', 'GET'])
+@login_required
 def items_update(item_id):
     # select amb 1 resultat
     item = db.session.query(Item).filter(Item.id == item_id).one()
@@ -54,6 +59,7 @@ def items_update(item_id):
         return render_template('items_update.html', item_id = item_id, form = form)
 
 @main_bp.route('/items/create', methods = ['POST', 'GET'])
+@login_required
 def items_create(): 
     # select que retorna una llista de resultats
     stores = db.session.query(Store).order_by(Store.id.asc()).all()
@@ -79,6 +85,7 @@ def items_create():
 
 
 @main_bp.route('/items/read/<int:item_id>')
+@login_required
 def items_read(item_id):
     # select amb join i 1 resultat
     (item, store) = db.session.query(Item, Store).join(Store).filter(Item.id == item_id).one()
@@ -86,6 +93,7 @@ def items_read(item_id):
     return render_template('items_read.html', item = item, store = store)
 
 @main_bp.route('/items/delete/<int:item_id>',methods = ['GET', 'POST'])
+@login_required
 def items_delete(item_id):
     # select amb 1 resultat
     item = db.session.query(Item).filter(Item.id == item_id).one()

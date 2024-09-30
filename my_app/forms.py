@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, IntegerField, SubmitField, SelectField
-from wtforms.validators import DataRequired, NumberRange, InputRequired
+from wtforms import StringField, IntegerField, SubmitField, SelectField, PasswordField
+from wtforms.validators import DataRequired, NumberRange, InputRequired, Email
 
 class ItemForm(FlaskForm):
     nom = StringField(
@@ -16,4 +16,13 @@ class ItemForm(FlaskForm):
 
 # Formulari generic per esborrar i aprofitar la CSRF Protection
 class DeleteForm(FlaskForm):
+    submit = SubmitField()
+
+class LoginForm(FlaskForm):
+    email = StringField(
+        validators = [Email(), DataRequired()]
+    )
+    password = PasswordField(
+        validators=[ DataRequired()]
+    )
     submit = SubmitField()

@@ -2,8 +2,10 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 import os
 import logging
+from flask_login import LoginManager
 
 db_manager = SQLAlchemy()
+login_manager = LoginManager()
 
 def configure_logging(app):
     log_level = app.config["LOGGING_LEVEL"]
@@ -27,6 +29,9 @@ def configure_db(app):
 
     # Inicialitza SQLAlchemy
     db_manager.init_app(app)
+    
+    # Inicialitza el login manager
+    login_manager.init_app(app)
 
     app.logger.info("Configuració de la base de dades aplicada")
 
@@ -43,10 +48,11 @@ def create_app():
     configure_db(app)
 
     with app.app_context():
-        from . import routes_main
+        from . import routes_main, routes_auth
 
         # Registra els blueprints
         app.register_blueprint(routes_main.main_bp)
+        app.register_blueprint(routes_auth.auth_bp)
 
     app.logger.info("Aplicació iniciada")
 
