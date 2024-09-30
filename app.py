@@ -1,7 +1,9 @@
 from flask import Flask, redirect, url_for, render_template
 
 app = Flask(__name__)
-app.config["SECRET_KEY"] = "Valor aleatori molt llarg i super secret"
+
+# Llegeixo la configuració del config.py de l'arrel
+app.config.from_object('config.Config')
 
 @app.route('/')
 def init():

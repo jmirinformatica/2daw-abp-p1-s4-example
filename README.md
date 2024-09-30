@@ -50,6 +50,10 @@ Per desactivar l'entorn:
 
     deactivate
 
+### Fitxer de configuració
+
+Crea un fitxer `.env` amb els paràmetres de configuració. Pots fer servir com a base el fitxer [.env.exemple](./.env.exemple).
+
 ## Run
 
 Executa:
