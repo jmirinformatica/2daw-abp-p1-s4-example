@@ -1,6 +1,6 @@
-# 2daw-abp-p1-s1-example
+# 2daw-abp-p1-s2-example
 
-Exemple de suport per l'sprint 1 del projecte 1 de 2n de DAW.
+Exemple de suport per l'sprint 2 del projecte 1 de 2n de DAW.
 
 ## Setup
 
