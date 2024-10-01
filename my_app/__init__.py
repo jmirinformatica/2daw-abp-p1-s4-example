@@ -2,11 +2,13 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_principal import Principal
+from .helper_mail import MailManager
 import os
 
 db_manager = SQLAlchemy()
 login_manager = LoginManager()
 principal_manager =  Principal()
+mail_manager = MailManager()
 
 def configure_db(app):
     # Ruta absoluta d'on està aquest fitxer __init__.py
@@ -23,14 +25,11 @@ def configure_db(app):
     # TODO: llegir de la configuració
     app.config["SQLALCHEMY_ECHO"] = True
 
-    # Inicialitza SQLAlchemy
+    # Inicialitza els plugins
     db_manager.init_app(app)
-
-    # Inicialitza el login manager
     login_manager.init_app(app)
-
-    # Initialitza flask_principal per a gestionar els rols
     principal_manager.init_app(app)
+    mail_manager.init_app(app)
 
     app.logger.info("Configuració de la base de dades aplicada")
 

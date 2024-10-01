@@ -1,0 +1,12 @@
+{% extends '_base.html' %}
+{% block content %}
+   <h3>Contact</h3>
+
+   <form action="/contact" method = "POST">
+      {{ form.csrf_token }}
+      <p>{{ form.msg.label }}: {{ form.msg() }}</p>
+      <p>{{ form.submit(value="ENVIA EL MISSATGE") }}</p>
+   </form>
+   <hr />
+   <p>Torna a la <a href="/">pàgina principal</a>.</p>
+{% endblock %}
