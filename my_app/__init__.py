@@ -1,37 +1,31 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-import os
-import logging
 from flask_login import LoginManager
 from flask_principal import Principal
+import os
 
 db_manager = SQLAlchemy()
 login_manager = LoginManager()
 principal_manager =  Principal()
 
-def configure_logging(app):
-    log_level = app.config["LOGGING_LEVEL"]
-    
-    # Possem el log_level a tots els loggers: https://stackoverflow.com/a/55490202
-    loggers = [logging.getLogger(name) for name in logging.root.manager.loggerDict]
-    for logger in loggers:
-        logger.setLevel(log_level)
-
-    app.logger.info("Configuració de logging aplicada")
-
 def configure_db(app):
     # Ruta absoluta d'on està aquest fitxer __init__.py
     basedir = os.path.abspath(os.path.dirname(__file__)) 
 
-    sqlite_file_relative_path = app.config['SQLITE_FILE_RELATIVE_PATH']
-    app.logger.info("Database: " + sqlite_file_relative_path)
+    # TODO: llegir de la configuració
+    sqlite_file_path = basedir + "/../sqlite/database.db"
+    app.logger.info("Database: " + sqlite_file_path)
 
     # paràmetre que farà servir SQLAlchemy per a connectar-se a la base de dades
-    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + basedir + "/../" + sqlite_file_relative_path
+    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + sqlite_file_path
+
+    # mostre als logs les ordres SQL que s'executen
+    # TODO: llegir de la configuració
+    app.config["SQLALCHEMY_ECHO"] = True
 
     # Inicialitza SQLAlchemy
     db_manager.init_app(app)
-    
+
     # Inicialitza el login manager
     login_manager.init_app(app)
 
@@ -45,9 +39,6 @@ def create_app():
 
     # Llegeixo la configuració del config.py de l'arrel
     app.config.from_object('config.Config')
-
-    # Configuració del logging
-    configure_logging(app)
 
     # Configuració de la base de dades
     configure_db(app)

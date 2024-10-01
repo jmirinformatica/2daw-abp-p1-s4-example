@@ -1,13 +1,9 @@
-from flask import Blueprint, redirect, url_for, render_template, current_app
+from flask import Blueprint, redirect, url_for, render_template
 from flask_login import current_user, login_required
 from .models import Item, Store
 from .forms import ItemForm, DeleteForm
 from .helper_role import HelperRole as hr
 from . import db_manager as db
-
-
-# per comoditat
-logger = current_app.logger
 
 # Blueprint
 main_bp = Blueprint(
@@ -25,12 +21,6 @@ def init():
 @login_required
 @hr.require_view_permission.require(http_exception=403)
 def items_list():
-    logger.debug("Exemple de missatge de debug")
-    logger.info("Exemple de missatge de nivell info")
-    logger.warning("Exemple de missatge de warning")
-    logger.error("Exemple de missatge d'error")
-    logger.critical("Exemple de missatge de nivell critical")
-
     # select amb join que retorna una llista de resultats
     items_with_stores = db.session.query(Item, Store).join(Store).order_by(Item.id.asc()).all()
     return render_template('items_list.html', items_with_stores = items_with_stores)
