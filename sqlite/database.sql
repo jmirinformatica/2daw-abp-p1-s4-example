@@ -15,3 +15,9 @@ INSERT INTO stores(nom) VALUES ("Mercadona");
 INSERT INTO stores(nom) VALUES ("Lidl");
 INSERT INTO stores(nom) VALUES ("Aldi");
 INSERT INTO stores(nom) VALUES ("Condis");
+
+INSERT INTO items(store_id, nom, unitats) VALUES (1, "Llet", 1);
+INSERT INTO items(store_id, nom, unitats) VALUES (2, "Pa", 20);
+INSERT INTO items(store_id, nom, unitats) VALUES (3, "Ous", 12);
+INSERT INTO items(store_id, nom, unitats) VALUES (4, "Formatge", 5);
+INSERT INTO items(store_id, nom, unitats) VALUES (1, "Iogurt", 4);
