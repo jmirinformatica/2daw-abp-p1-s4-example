@@ -1,8 +1,10 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from flask_login import LoginManager
 import os
 
 db_manager = SQLAlchemy()
+login_manager = LoginManager()
 
 def configure_db(app):
     # Ruta absoluta d'on està aquest fitxer __init__.py
@@ -21,6 +23,9 @@ def configure_db(app):
 
     # Inicialitza SQLAlchemy
     db_manager.init_app(app)
+
+    # Inicialitza el login manager
+    login_manager.init_app(app)
 
     app.logger.info("Configuració de la base de dades aplicada")
 
