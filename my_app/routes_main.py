@@ -4,9 +4,6 @@ from .models import Item, Store
 from .forms import ItemForm, DeleteForm
 from . import db_manager as db
 
-# per comoditat
-logger = current_app.logger
-
 # Blueprint
 main_bp = Blueprint(
     "main_bp", __name__, template_folder="templates", static_folder="static"
@@ -22,12 +19,6 @@ def init():
 @main_bp.route('/items/list')
 @login_required
 def items_list():
-    logger.debug("Exemple de missatge de debug")
-    logger.info("Exemple de missatge de nivell info")
-    logger.warning("Exemple de missatge de warning")
-    logger.error("Exemple de missatge d'error")
-    logger.critical("Exemple de missatge de nivell critical")
-
     # select amb join que retorna una llista de resultats
     items_with_stores = db.session.query(Item, Store).join(Store).order_by(Item.id.asc()).all()
     return render_template('items_list.html', items_with_stores = items_with_stores)
