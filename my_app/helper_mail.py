@@ -19,10 +19,10 @@ class MailManager:
         self.external_url = app.config.get('EXTERNAL_URL')
 
     # https://realpython.com/python-send-email/#option-2-using-starttls
-    def send_contact_msg(self, msg):
+    def send_contact_msg(self, user, msg):
 
         subject = "Missatge de contacte"
-        content = f"""Missatge de contacte rebut:
+        content = f"""Missatge de contacte rebut de {user.email}:
         
         {msg}
 
@@ -44,8 +44,6 @@ class MailManager:
             server.starttls(context=context)
             server.ehlo()  # Can be omitted
             server.login(self.sender_addr, self.sender_password)
-
-            print("Login done!")
 
             msg = EmailMessage()
             msg['From'] = formataddr((self.sender_name, self.sender_addr))
