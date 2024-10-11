@@ -9,3 +9,11 @@ table {
 td, th {
     border: 1px solid yellow;
 }
+
+.messages .error {
+    color: red;
+}
+
+.messages .success {
+    color: green;
+}

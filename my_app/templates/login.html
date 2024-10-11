@@ -1,15 +1,5 @@
-<!DOCTYPE html>
-<html lang="ca">
-
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>My App</title>
-	<link href="/static/css/my_app.css" rel="stylesheet">
-</head>
-
-<body>
+{% extends '_base.html' %}
+{% block content %}
    <h3>Login</h3>
 
    <form action="/login" method = "POST">
@@ -18,6 +8,4 @@
       <p>{{ form.password.label }}: {{ form.password() }}</p>
       <p>{{ form.submit(value="LOGIN") }}</p>
    </form>
-</body>
-
-</html>
+{% endblock %}

@@ -1,4 +1,4 @@
-from flask import Blueprint, redirect, render_template, url_for
+from flask import Blueprint, redirect, render_template, url_for, flash
 from flask_login import current_user, login_user, login_required, logout_user
 from . import login_manager
 from .models import User
@@ -16,6 +16,7 @@ auth_bp = Blueprint(
 def login():
     # Si ja està autenticat, sortim d'aquí
     if current_user.is_authenticated:
+        flash("Ja has iniciat sessió anteriorment", "info")
         return redirect(url_for("main_bp.init"))
 
     form = LoginForm()
@@ -30,9 +31,11 @@ def login():
             # aquí s'actualitzen els rols que té l'usuari
             HelperRole.notify_identity_changed()
             
+            flash("Sessió iniciada correctament", "success")
             return redirect(url_for("main_bp.init"))
 
         # si arriba aquí, és que no s'ha autenticat correctament
+        flash("Error d'autenticació", "error")
         return redirect(url_for("auth_bp.login"))
     
     return render_template('login.html', form = form)
@@ -53,4 +56,5 @@ def unauthorized():
 @login_required
 def logout():
     logout_user()
+    flash("Sessió tancada correctament", "success")
     return redirect(url_for("auth_bp.login"))
