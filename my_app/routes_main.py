@@ -1,4 +1,4 @@
-from flask import Blueprint, redirect, url_for, render_template
+from flask import Blueprint, redirect, url_for, render_template, request
 from flask_login import current_user, login_required
 from .models import Item, Store
 from .forms import ItemForm, DeleteForm, ContactForm
@@ -35,7 +35,12 @@ def contact():
 def items_list():
     # select amb join que retorna una llista de resultats
     items_with_stores = db.session.query(Item, Store).join(Store).order_by(Item.id.asc()).all()
-    return render_template('items_list.html', items_with_stores = items_with_stores)
+
+    json = request.args.get('json', default="False", type=str)
+    if json.lower() == "true":
+        return Item.to_dict_collection(items_with_stores)
+    else:
+        return render_template('items_list.html', items_with_stores = items_with_stores)
 
 @main_bp.route('/items/update/<int:item_id>',methods = ['POST', 'GET'])
 @login_required
