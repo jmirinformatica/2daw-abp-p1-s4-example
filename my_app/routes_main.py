@@ -42,6 +42,15 @@ def items_list():
     else:
         return render_template('items_list.html', items_with_stores = items_with_stores)
 
+@main_bp.route('/items/read/<int:item_id>')
+@login_required
+@hr.require_view_permission.require(http_exception=403)
+def items_read(item_id):
+    # select amb join i 1 resultat
+    (item, store) = db.session.query(Item, Store).join(Store).filter(Item.id == item_id).one()
+    
+    return render_template('items_read.html', item = item, store = store)
+
 @main_bp.route('/items/update/<int:item_id>',methods = ['POST', 'GET'])
 @login_required
 @hr.require_edit_permission.require(http_exception=403)
@@ -61,8 +70,7 @@ def items_update(item_id):
         form.populate_obj(item)
 
         # update!
-        db.session.add(item)
-        db.session.commit()
+        item.update()
 
         # https://en.wikipedia.org/wiki/Post/Redirect/Get
         return redirect(url_for('main_bp.items_read', item_id = item_id))
@@ -87,23 +95,12 @@ def items_create():
         form.populate_obj(new_item)
 
         # insert!
-        db.session.add(new_item)
-        db.session.commit()
+        new_item.save()
 
         # https://en.wikipedia.org/wiki/Post/Redirect/Get
         return redirect(url_for('main_bp.items_list'))
     else: #GET
         return render_template('items_create.html', form = form)
-
-
-@main_bp.route('/items/read/<int:item_id>')
-@login_required
-@hr.require_view_permission.require(http_exception=403)
-def items_read(item_id):
-    # select amb join i 1 resultat
-    (item, store) = db.session.query(Item, Store).join(Store).filter(Item.id == item_id).one()
-    
-    return render_template('items_read.html', item = item, store = store)
 
 @main_bp.route('/items/delete/<int:item_id>',methods = ['GET', 'POST'])
 @login_required
@@ -115,8 +112,7 @@ def items_delete(item_id):
     form = DeleteForm()
     if form.validate_on_submit(): # si s'ha fet submit al formulari
         # delete!
-        db.session.delete(item)
-        db.session.commit()
+        item.delete()
 
         return redirect(url_for('main_bp.items_list'))
     else: # GET
