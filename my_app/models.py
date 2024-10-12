@@ -1,9 +1,9 @@
 from . import db_manager as db
 from flask_login import UserMixin
-from .mixins import SerializableMixin
+from .mixins import SerializableMixin, BaseMixin
 
 # Taula items
-class Item(db.Model, SerializableMixin):
+class Item(db.Model, SerializableMixin, BaseMixin):
     __tablename__ = "items"
     id = db.Column(db.Integer, primary_key=True)
     store_id = db.Column(db.Integer, db.ForeignKey("stores.id"), nullable=False)
@@ -11,13 +11,13 @@ class Item(db.Model, SerializableMixin):
     unitats = db.Column(db.Integer, nullable=False)
 
 # Taula stores
-class Store(db.Model, SerializableMixin):
+class Store(db.Model, SerializableMixin, BaseMixin):
     __tablename__ = "stores"
     id = db.Column(db.Integer, primary_key=True)
     nom = db.Column(db.String, nullable=False)
 
 # Taula users
-class User(UserMixin, db.Model, SerializableMixin):
+class User(UserMixin, db.Model, SerializableMixin, BaseMixin):
     __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String, unique=True, nullable=False)
