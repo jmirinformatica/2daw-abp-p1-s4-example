@@ -18,3 +18,5 @@ class Config:
     CONTACT_ADDR = environ.get('CONTACT_ADDR')
 
     EXTERNAL_URL = environ.get('EXTERNAL_URL')
+
+    SQLALCHEMY_DATABASE_URI = environ.get('SQLALCHEMY_DATABASE_URI', "")
