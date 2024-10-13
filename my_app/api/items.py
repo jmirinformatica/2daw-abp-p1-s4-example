@@ -69,7 +69,7 @@ def update_item(id):
 # Delete
 @api_bp.route('/items/<int:id>', methods=['DELETE'])
 def delete_item(id):
-    item = Item.get(id)
+    item = db.session.query(Item).filter(Item.id == id).one_or_none()
     if item:
         item.delete()
         current_app.logger.debug("DELETED item: {}".format(id))
