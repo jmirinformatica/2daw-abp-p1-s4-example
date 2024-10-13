@@ -1,6 +1,7 @@
 from . import api_bp
 from .errors import not_found, bad_request
 from ..models import Item, Store
+from .helper_auth import token_auth
 from .helper_json import json_request, json_response
 from flask import current_app, request
 from .. import db_manager as db
@@ -37,6 +38,7 @@ def get_item(id):
 
 # Create
 @api_bp.route('/items', methods=['POST'])
+@token_auth.login_required
 def create_item():
     try:
         data = json_request(['nom', 'store_id', 'unitats'])
@@ -50,6 +52,7 @@ def create_item():
 
 # Update
 @api_bp.route('/items/<int:id>', methods=['PUT'])
+@token_auth.login_required
 def update_item(id):
     item = db.session.query(Item).filter(Item.id == id).one_or_none()
     if item:
@@ -68,6 +71,7 @@ def update_item(id):
 
 # Delete
 @api_bp.route('/items/<int:id>', methods=['DELETE'])
+@token_auth.login_required
 def delete_item(id):
     item = db.session.query(Item).filter(Item.id == id).one_or_none()
     if item:

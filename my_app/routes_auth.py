@@ -5,7 +5,6 @@ from .models import User
 from .forms import LoginForm
 from .helper_role import HelperRole
 from . import db_manager as db
-from werkzeug.security import check_password_hash
 
 # Blueprint
 auth_bp = Blueprint(
@@ -25,7 +24,7 @@ def login():
         plain_text_password = form.password.data
 
         user = load_user(email)
-        if user and check_password_hash(user.password, plain_text_password):
+        if user and user.check_password(plain_text_password):
             # aquí és crea la cookie
             login_user(user)
             # aquí s'actualitzen els rols que té l'usuari
