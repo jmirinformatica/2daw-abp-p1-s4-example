@@ -52,10 +52,27 @@ Per desactivar l'entorn:
 
 ### Base de dades
 
-La base de dades SQLite és dins de la carpeta [sqlite](./databases/sqlite) s'ha de dir `database.db`, tot i que es pot configurar un nom diferent al fitxer de configuració. S'ha creat amb l'script [database.sql](./databases/sqlite/database.sql). Aquest script conté dos usuaris de prova:
+#### SQLite
+
+La base de dades SQLite és dins de la carpeta [sqlite](./sqlite) s'ha de dir `database.db`, tot i que es pot configurar un nom diferent al fitxer de configuració. S'ha creat amb l'script [database.sql](./sqlite/database.sql). Aquest script conté dos usuaris de prova:
 
 * `ed@test.cat` amb la contrasenya `patata` i el rol **editor**.
 * `vi@test.cat` amb la contrasenya `patata` i el rol **viewer**.
+
+#### PostgreSQL o MySQL remot
+
+S'ha de configurar la variable d'entorn `SQLALCHEMY_DATABASE_URI` al fitxer `.env`. Ha de tenir aquesta sintaxis:
+
+    #postgresql
+    SQLALCHEMY_DATABASE_URI="postgresql://usuari:password@host:port/base-de-dades"
+    #mysql
+    SQLALCHEMY_DATABASE_URI="mysql+pymysql://usuari:password@host:port/base-de-dades"
+
+La base de dades ha de tenir les taules creades. Aquí pots trobar l'script per crear les taules a [PostgreSQL](./docker/databases/postgres/database.sql) i per [MySQL](./docker/databases/mysql/database.sql).
+
+#### PostgreSQL o MySQL dockeritzat
+
+Dins de la carpeta [docker](./docker/) crea un fitxer `.env` fent servir com a base el [.env.exemple](./docker/.env.exemple) i inicia el docker compose de MySQL o PostgreSQL. Desprès, afegeix com el punt anterior la variable `SQLALCHEMY_DATABASE_URI` al fitxer `.env` de l'arrel.
 
 ### Fitxer de configuració
 
