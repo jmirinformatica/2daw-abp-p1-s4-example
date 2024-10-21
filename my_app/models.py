@@ -10,11 +10,15 @@ class Item(db.Model, SerializableMixin, BaseMixin):
     nom = db.Column(db.String, nullable=False)
     unitats = db.Column(db.Integer, nullable=False)
 
+    store = db.relationship("Store", back_populates="items", lazy="joined")
+
 # Taula stores
 class Store(db.Model, SerializableMixin, BaseMixin):
     __tablename__ = "stores"
     id = db.Column(db.Integer, primary_key=True)
     nom = db.Column(db.String, nullable=False)
+
+    items = db.relationship("Item", back_populates="store", lazy="select")
 
 # Taula users
 class User(UserMixin, db.Model, SerializableMixin, BaseMixin):

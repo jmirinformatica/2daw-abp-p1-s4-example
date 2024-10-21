@@ -1,8 +1,11 @@
+from . import db_manager as db
+from sqlalchemy.ext.hybrid import hybrid_property
 from collections import OrderedDict
 from sqlalchemy.engine.row import Row
-from . import db_manager as db
+from sqlalchemy.orm.collections import InstrumentedList
 
 class BaseMixin():
+    
     @classmethod
     def create(cls, **kwargs):
         r = cls(**kwargs)
@@ -34,34 +37,54 @@ class SerializableMixin():
 
     exclude_attr = []
 
-    def to_dict(self):
+    def to_dict(self, max_levels=1):
+        return self.__recursive_to_dict(max_levels)
+    
+    def __recursive_to_dict(self, level):
         result = OrderedDict()
         for key in self.__mapper__.c.keys():
             if key not in self.__class__.exclude_attr:
                 result[key] = getattr(self, key)
+        
+        for key in self.__mapper__.all_orm_descriptors:
+            if type(key) == hybrid_property:
+                name = key.__name__
+                result[name] = getattr(self, name)
+            
+        for key in self.__mapper__.relationships.keys():
+            if key not in self.__class__.exclude_attr:
+                value = getattr(self, key)
+                if isinstance(value, SerializableMixin):
+                    if level > 0:
+                        result[key] = value.__recursive_to_dict(level - 1)
+                elif isinstance(value, InstrumentedList):
+                    if level > 0:
+                        result[key] = []
+                        for x in value:
+                            if isinstance(x, SerializableMixin):
+                                result[key].append(x.__recursive_to_dict(level - 1))
         return result
 
     @staticmethod
-    def to_dict_collection(collection):
+    def to_dict_collection(collection, max_levels=1):
         result = []
-        for x in collection:  
-            if (type(x) is Row):
+        for x in collection:
+            if isinstance(x, Row):
                 obj = {}
                 first = True
                 for y in x:
-                    if first:
-                        # model
-                        obj = y.to_dict()
-                        first = False
-                    elif y:
-                        # relationships
-                        key = y.__class__.__name__.lower()
-                        obj[key] = y.to_dict()
-                        fk = key + '_id'
-                        if fk in obj:
-                            del obj[fk]
+                    if isinstance(y, SerializableMixin):
+                        if first:
+                            # model
+                            obj = y.to_dict()
+                            first = False
+                        elif y:
+                            # relationships
+                            key = y.__class__.__name__.lower()
+                            obj[key] = y.to_dict()
                 result.append(obj)
-            else:
-                # only model
-                result.append(x.to_dict())
+
+            if isinstance(x, SerializableMixin):
+                result.append(x.to_dict(max_levels))
+               
         return result
