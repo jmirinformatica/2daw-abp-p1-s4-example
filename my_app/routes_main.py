@@ -33,23 +33,21 @@ def contact():
 @login_required
 @hr.require_view_permission.require(http_exception=403)
 def items_list():
-    # select amb join que retorna una llista de resultats
-    items_with_stores = db.session.query(Item, Store).join(Store).order_by(Item.id.asc()).all()
+    items = db.session.query(Item).order_by(Item.id.asc()).all()
 
     json = request.args.get('json', default="False", type=str)
     if json.lower() == "true":
-        return Item.to_dict_collection(items_with_stores)
+        return Item.to_dict_collection(items)
     else:
-        return render_template('items_list.html', items_with_stores = items_with_stores)
+        return render_template('items_list.html', items = items)
 
 @main_bp.route('/items/read/<int:item_id>')
 @login_required
 @hr.require_view_permission.require(http_exception=403)
 def items_read(item_id):
-    # select amb join i 1 resultat
-    (item, store) = db.session.query(Item, Store).join(Store).filter(Item.id == item_id).one()
+    item = db.session.query(Item).filter(Item.id == item_id).one()
     
-    return render_template('items_read.html', item = item, store = store)
+    return render_template('items_read.html', item = item)
 
 @main_bp.route('/items/update/<int:item_id>',methods = ['POST', 'GET'])
 @login_required

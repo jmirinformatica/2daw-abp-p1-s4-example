@@ -125,7 +125,6 @@
 									"    pm.response.to.be.an(\"object\");",
 									"    pm.response.to.have.jsonBody(\"success\");",
 									"    pm.response.to.have.jsonBody(\"data\");",
-									"    //pm.response.to.have.jsonBody(\"_links\");",
 									"    pm.response.to.not.have.jsonBody(\"error\");",
 									"});",
 									"",
@@ -140,12 +139,7 @@
 									"    pm.expect(jsonResponse.data).to.be.an(\"object\");",
 									"    pm.expect(jsonResponse.data).to.have.all.keys(\"id\", \"nom\");",
 									"});",
-									"",
-									"//pm.test(\"JSON response: _links\", function () {",
-									"//    var jsonResponse = pm.response.json();",
-									"//    pm.expect(jsonResponse._links).to.be.an(\"object\");",
-									"//    pm.expect(jsonResponse._links).to.have.property(\"self\");",
-									"//});"
+									""
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -971,7 +965,7 @@
 									"pm.test(\"JSON response: data\", function () {",
 									"    var jsonResponse = pm.response.json();",
 									"    pm.expect(jsonResponse.data).to.be.an(\"object\");",
-									"    pm.expect(jsonResponse.data).to.have.all.keys(\"id\", \"nom\", \"store\", \"unitats\");",
+									"    pm.expect(jsonResponse.data).to.have.all.keys(\"id\", \"nom\", \"store\", \"store_id\", \"unitats\");",
 									"});",
 									"",
 									"//pm.test(\"JSON response: _links\", function () {",

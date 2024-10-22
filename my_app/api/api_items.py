@@ -13,24 +13,20 @@ def get_items():
     if search:
         # Filter using query param
         my_filter = Item.nom.like('%' + search + '%')
-        items_with_stores = db.session.query(Item, Store).join(Store).filter(my_filter).order_by(Item.id.asc()).all()
+        items = db.session.query(Item).filter(my_filter).order_by(Item.id.asc()).all()
     else:
         # No filter
-        items_with_stores = db.session.query(Item, Store).join(Store).order_by(Item.id.asc()).all()
-    data = Item.to_dict_collection(items_with_stores)
+        items = db.session.query(Item).order_by(Item.id.asc()).all()
+    data = Item.to_dict_collection(items)
     return json_response(data)
 
 # Read
 @api_bp.route('/items/<int:id>', methods=['GET'])
 def get_item(id):
-    result = db.session.query(Item, Store).join(Store).filter(Item.id == id).one_or_none()
-    if result:
-        (item, store) = result
+    item = db.session.query(Item).filter(Item.id == id).one_or_none()
+    if item:
         # Serialize data
-        data = item.to_dict()
-        # Add relationships
-        data["store"] = store.to_dict()
-        del data["store_id"]
+        data = item.to_dict(max_levels=1)
         return json_response(data)
     else:
         current_app.logger.debug("Item {} not found".format(id))
