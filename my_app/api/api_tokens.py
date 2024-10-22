@@ -8,12 +8,14 @@ logger = current_app.logger
 @api_bp.route('/tokens', methods=['POST'])
 @basic_auth.login_required
 def get_token():
+    user_id = basic_auth.current_user().id
     token = basic_auth.current_user().get_auth_token()
     logger.debug("Token:" + token)
-    return json_response({'token': token})
+    return json_response({'id': user_id, 'token': token})
 
 @api_bp.route('/tokens', methods=['DELETE'])
 @token_auth.login_required
 def revoke_token():
+    user_id = basic_auth.current_user().id
     token_auth.current_user().revoke_auth_token()
-    return '', 204
+    return json_response({'id': user_id})
